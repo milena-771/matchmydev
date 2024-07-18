@@ -16,7 +16,7 @@ The application was divided in **3 microservices.**
 
 - **Projects service** enables managers to **create project sheets**, **modify** them, and **consult** them; a developer can **read and examine** them and eventually add a project to her/his favorite.
 
-- **Authentication service** takes care of the user's authentication and the managenement of password and mail.
+- **Authentication service** takes care of the user's authentication and the managment of password and mail.
 
 ## Three-layers architecture
 
