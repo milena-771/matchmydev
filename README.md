@@ -4,7 +4,7 @@
 
 As part of my training, I participated in the implementation of this project. <br>
 Together with my group, we worked on designing and developing the **Profile service** of this application.<br>
-The mais goal of this project is to streamline developer mobility and help managers **find** developer and tech lead profiles that meet the **needs of their projects.**
+The main goal of this project is to **streamline developers mobility** and help managers **find** developer and tech lead profiles that meet the **needs of their projects.**
 
 ## Microservice
 
