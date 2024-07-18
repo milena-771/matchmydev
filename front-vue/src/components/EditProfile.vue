@@ -1,18 +1,24 @@
 <script>
+import { useRoute } from 'vue-router';
   import dayjs from "dayjs";
   import { useVuelidate } from "@vuelidate/core";
   import { maxLength, maxValue } from "@vuelidate/validators";
 
   export default {
     setup() {
-      return { v$: useVuelidate() };
+      return {
+        route: useRoute(),
+        v$: useVuelidate() 
+      };
     },
 
     data() {
       return {
         fileSystem: import.meta.env.VITE_IMG_BASE_URL,
+        id:this.route.params.id,
         sizeFile: true,
         dayjs,
+        currentAvatar:null,
         profile: {
           firstName: null,
           lastName: null,
@@ -52,7 +58,7 @@
       },
 
       async getProfile() {
-        const response = await this.$axios.get("/profiles/my");
+        const response = await this.$axios.get(`/profiles/${this.id}`);
         const data = response.data;
         this.profile.firstName = data.firstName;
         this.profile.lastName = data.lastName;
@@ -61,8 +67,7 @@
         this.profile.jobTitle = data.jobTitle;
         this.profile.hiringDate = data.hiringDate;
         this.profile.contractType = data.contractype;
-        this.profile.avatar = data.avatar;
-
+        this.currentAvatar = data.avatar;
         this.inputs.description = data.description;
       },
 
@@ -75,10 +80,11 @@
             formData.append("avatar", this.inputs.file);
           }
           formData.append("description", this.inputs.description);
-          await this.$axios.patch("/profiles/my", formData);
-          console.log("valid");
-          console.log("this.inputs.file", this.inputs.file);
-          console.log("this.inputs.description", this.inputs.description);
+          const response = await this.$axios.put(`/profiles/${this.id}`, formData);
+          if(response.data.avatar!= null){
+              this.actualPoster = response.data.poster;
+          }
+          this.getProfile();  
         }
       },
 
@@ -89,9 +95,9 @@
         }
       },
     },
-    async mounted() {
-      this.getProfile(false);
-    },
+    beforeMount() {
+      this.getProfile();
+    }
   };
 </script>
 <template>
@@ -99,7 +105,7 @@
     <h1>My Profile</h1>
     <div class="row row-cols-1 row-cols-md-2 mb-3 mt-4">
       <div class="col-md-4 mb-5">
-        <img :src="fileSystem + profile.avatar" class="rounded img-fluid" />
+        <img :src="fileSystem + currentAvatar" class="rounded img-fluid" />
       </div>
       <div class="col-md-4">
         <h2 class="profile-dev-name">

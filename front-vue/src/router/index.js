@@ -1,19 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
-import SearchProfilesView from "../views/SearchProfilesView.vue";
-import EditProfileView from "../views/EditProfileView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/profiles",
-      name: "search-profiles",
-      component: SearchProfilesView,
+      path: '/',
+      name: 'search-profiles',
+      component: () => import('../components/SearchProfiles.vue')
     },
     {
-      path: "/profiles/my",
-      name: "edit-profile",
-      component: EditProfileView,
+      path: '/update/:id',
+      name: 'update-profile',
+      component: () => import('../components/EditProfile.vue')
     },
   ],
 });

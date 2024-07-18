@@ -1,4 +1,5 @@
 <script>
+import { RouterLink } from 'vue-router';
 import dayjs from 'dayjs';
 
 export default {
@@ -50,14 +51,18 @@ export default {
 <h2>Developers found</h2>
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4 mb-3 font-regular" >
-  <div class="col"  v-for="profile in profiles">
+  <div class="col"  v-for="profile in profiles" :key="profile.id" id="stickers">
         <div class="card h-100">
           <div class="card-body">
             <p class="dev-name">{{ profile.firstName }} {{ profile.lastName }}</p>
             <p class="card-text">{{ profile.contractTypeName }}</p>
             <p class="card-text"><span class="me-2 mb-2"><i class="bi bi-briefcase"></i></span>{{ formatDate(profile.hiringDate) }}</p>
             </div>
-          <div class="card-footer"><i class="bi bi-eye"></i></div>
+          <div class="card-footer">
+            <RouterLink :to="{ name:'update-profile', params:{id: profile.id}}">
+              <i class="bi bi-eye btnDetail"></i>
+            </RouterLink>           
+          </div>
         </div>
       </div>
 </div>
@@ -68,5 +73,8 @@ export default {
 <style scoped>
 .form-control{
     border-right: none;
+}
+.btnDetail{
+  color:black;
 }
 </style>
