@@ -20,7 +20,7 @@ The application was divided in **3 microservices.**
 
 ## Three-layers architecture
 
-Each services was divided in a 3 layers architecture to clearly seperate responsibilities for each:
+Each service has been divided in a 3 layers architecture to clearly seperate responsibilities for each:
 
 - **Presentation layer** represents the interface that will be displayed to the user to allow him to **access and interact** with the application.For this, we implemented a **SPA** which is a frontend architecture based on a single HTML page wich imports several components. This ensures better performance and a better user experience.
 
